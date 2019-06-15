@@ -41,3 +41,7 @@ Comando para executar:
 $ yarn start
 ```
 
+Instalação do pacote para gerenciar rotas 
+```
+$ yarn add react-router-dom
+``` 
