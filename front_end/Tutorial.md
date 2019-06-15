@@ -45,3 +45,40 @@ Instalação do pacote para gerenciar rotas
 ```
 $ yarn add react-router-dom
 ``` 
+
+## Criando Classes 
+Estrutura básica de um arquivo de classe:
+```javascript 
+import React, { Component } from 'react'; 
+
+class NomeClasse extends Component { 
+    render() {
+        return (
+            <h1> Teste </h1> 
+        );
+    }
+}
+
+export default NomeClasse;  
+``` 
+
+## Organizando as rotas 
+
+```javascript
+import React from 'react'; 
+import {Switch, Route} from 'react-router-dom'; 
+
+import Pagina1 from './pages/Pagina1';
+import Pagina2 from './pages/Pagina2';
+
+function Routes() {
+    return (
+        <Switch>
+            <Route path="/pagina1" component={Pagina1} />
+            <Route path="/pagina2" component={Pagina2} />
+        </Switch>    
+    );
+}
+
+export default Routes; 
+``` 
