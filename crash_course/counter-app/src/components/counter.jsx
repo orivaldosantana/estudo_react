@@ -1,3 +1,5 @@
+//  1:17:43
+
 import React, { Component } from "react";
 
 class Counter extends Component {
@@ -5,7 +7,6 @@ class Counter extends Component {
     count: 0,
     tags: ["tag1", "tag2", "tag3"]
   };
-
 
   render() {
     return (
