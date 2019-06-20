@@ -85,4 +85,5 @@ export default Routes;
 
 # Referências 
 
-1. Semana OmniStack - Rocketseat, https://rocketseat.com.br/week-7/inscricao
+1. Semana OmniStack - Rocketseat, https://rocketseat.com.br/week-7/inscricao 
+1. Controlando autenticação em rotas no ReactJS - Diego Fernandes, https://www.youtube.com/watch?v=sYe4r8WXGQg 

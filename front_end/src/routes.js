@@ -11,6 +11,7 @@ function Routes() {
             <Route path="/user" component={User} />
             <Route path="/admin" component={Admin} />
             <Route path="/login" component={Login} />
+            <Route path="/" component={Login} />
         </Switch>    
     );
 }
