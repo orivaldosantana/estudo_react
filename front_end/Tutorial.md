@@ -82,3 +82,7 @@ function Routes() {
 
 export default Routes; 
 ``` 
+
+# Referências 
+
+1. Semana OmniStack - Rocketseat, https://rocketseat.com.br/week-7/inscricao

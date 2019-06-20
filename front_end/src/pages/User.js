@@ -1,41 +1,43 @@
 import React, { Component } from 'react'; 
-import Octicon, {Play} from '@primer/octicons-react'
+import SimpleDevice from '../components/SimpleDevice'; 
 import './User.css'; 
 
+
+
 class User extends Component { 
+    constructor(){
+        super();
+        this.state = { 
+            authorizations: [
+                {
+                    name: "Dispositivo 1",
+                    device: "5d02f4de547e1308c31ce621",
+                    status: "Conectado - Ligado"
+                },
+                {
+                    name: "Novo Dispositivo 2",
+                    description: "5d02f4de547e1308c31ce621",
+                    status: "Conectado - Ligado"
+                },
+                {
+                    name: "Novo Dispositivo 3",
+                    description: "5d02f4de547e1308c31ce621",
+                    status: "Conectado - Ligado"
+                }
+            ]
+         };
+    
+    }
     render() {
         return (
             <section id="device-list"> 
-                <device>
-                  <header> 
-                    <div className="device-info">     
-                        <span> Porta 1 </span> 
-                        <span className="status"> Conectado - Desligado </span> 
-                    </div>
-                    <Octicon icon={Play} size='medium' ariaLabel='Play'/>
-                  </header>
-                </device> 
+                <SimpleDevice>
 
-                <device>
-                  <header> 
-                    <div className="device-info">     
-                        <span> Porta 2 </span> 
-                        <span className="status"> Conectado - Desligado </span> 
-                    </div>
-                    <a href='https://github.com'>
-                        <Octicon icon={Play} size='medium' ariaLabel='Play'/>
-                    </a>
-                  </header>
-                </device>
+                </SimpleDevice>
 
-                <device>
-                  <header> 
-                    <div className="device-info">     
-                        <span> Porta 3 </span> 
-                        <span className="status"> Conectado - Desligado </span> 
-                    </div>
-                  </header>  
-                </device> 
+                <SimpleDevice>
+
+                </SimpleDevice>
  
             </section>  
         );
