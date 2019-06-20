@@ -13,12 +13,15 @@ class SimpleDevice extends Component {
         this.deviceState = 0; 
     }
 
+    
+    componentDidMount() {
+        this.setState(this.props.children); 
+    }
+    
     handleSubmit(e){
         e.preventDefault();
         this.deviceState = ! this.deviceState; 
-        console.log("Submit "+this.deviceState );
-
-
+        console.log(this.state.name+" "+this.deviceState );
     }
 
     render() {
@@ -26,8 +29,8 @@ class SimpleDevice extends Component {
             <div className="device">
                   <header> 
                     <div className="device-info">     
-                        <span> Porta 1 </span> 
-                        <span className="status"> Conectado - Desligado </span> 
+                        <span> {this.state.name} </span> 
+                        <span className="status"> {this.state.status} </span> 
                     </div>
                     <form onSubmit={this.handleSubmit}>
                     <button type="submit">

@@ -31,14 +31,11 @@ class User extends Component {
     render() {
         return (
             <section id="device-list"> 
-                <SimpleDevice>
-
-                </SimpleDevice>
-
-                <SimpleDevice>
-
-                </SimpleDevice>
- 
+                {this.state.authorizations.map( device => (
+                    <SimpleDevice>
+                    {device} 
+                    </SimpleDevice> 
+                ))} 
             </section>  
         );
     }
