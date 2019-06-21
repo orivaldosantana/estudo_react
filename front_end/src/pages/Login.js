@@ -1,8 +1,46 @@
 import React, { Component } from 'react'; 
+import AuthService from '../components/AuthService';
 
 import './Login.css'
 
 class Login extends Component { 
+    constructor(props){
+        super(props); 
+        this.authenticateUser = this.authenticateUser.bind(this);
+        this.handleChange = this.onChange.bind(this);
+        this.auth = new AuthService();
+        this.state = {
+
+        }  
+    }
+
+    authenticateUser(e){
+        e.preventDefault();
+        
+        this.auth.login(this.state.email,this.state.password)
+            .then(res =>{
+                console.log(res.token);
+               this.props.history.replace('/user');
+            })
+            .catch(err =>{
+                alert(err);
+            }) 
+    }
+
+    onChange(e){
+
+        this.setState(
+            {
+                [e.target.name]: e.target.value
+            }
+        )
+    }
+
+    componentWillMount(){
+        if(this.auth.loggedIn())
+            this.props.history.replace('/user');
+    }
+
     render() {
         return (
             <div className="container"> 
@@ -13,15 +51,30 @@ class Login extends Component {
                 <form  >
                     <h2> Login </h2>
                     <div className="form-group">
-                        <label htmlFor="exampleInputEmail1">Email</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                        <label htmlFor="inputEmail">Email</label>
+                        <input 
+                            id="inputEmail"
+                            type="email" 
+                            className="form-control" 
+                            name="email" 
+                            aria-describedby="emailHelp" 
+                            placeholder="Enter email"
+                            onChange={this.handleChange}
+                         />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="exampleInputPassword1">Senha</label>
-                        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+                        <label htmlFor="inputPassword">Senha</label>
+                        <input 
+                            id="inputPassword"
+                            type="password" 
+                            className="form-control" 
+                            name="password" 
+                            placeholder="Password" 
+                            onChange={this.handleChange}
+                        />
                     </div>
 
-                    <button type="submit" className="btn btn-primary">Entrar</button>
+                    <button type="submit" className="btn btn-primary"onClick={this.authenticateUser} >Entrar</button>
                 </form>
             </div>
             </div>
