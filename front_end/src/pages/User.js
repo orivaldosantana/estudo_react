@@ -1,13 +1,13 @@
-import React, { Component } from 'react'; 
-import SimpleDevice from '../components/SimpleDevice'; 
-import './User.css'; 
+import React, { Component } from 'react';
+import SimpleDevice from '../components/SimpleDevice';
+import axios from "axios";
+import './User.css';
 
 
-
-class User extends Component { 
-    constructor(){
+class User extends Component {
+    constructor() {
         super();
-        this.state = { 
+        this.state = {
             authorizations: [
                 {
                     name: "Dispositivo 1",
@@ -25,18 +25,34 @@ class User extends Component {
                     status: "Conectado - Ligado"
                 }
             ]
-         };
-    
+        };
+
     }
+
+
+    populateAuthorizations = async () => {
+        const request = await axios.get('http://localhost:3002/device');
+        if(request !== undefined){
+            const data = request.data;
+            console.log(data[0]);
+        }
+
+    }
+
+    async componentDidMount() {
+        document.title = "Devices";
+        await this.populateAuthorizations();
+    }
+
     render() {
         return (
-            <section id="device-list"> 
-                {this.state.authorizations.map( device => (
-                    <SimpleDevice>
-                    {device} 
-                    </SimpleDevice> 
-                ))} 
-            </section>  
+            <section id="device-list">
+                {this.state.authorizations.map((device, index) => (
+                    <SimpleDevice key={index} >
+                        {device}
+                    </SimpleDevice>
+                ))}
+            </section>
         );
     }
 }

@@ -10,20 +10,18 @@ export default class AuthService {
         this.getProfile = this.getProfile.bind(this)
     }
 
-    login(email, password) {
+    async login(email, password) {
         
         // Get a token from api server using the fetch api
-        return this.fetch(`${this.domain}/auth/authenticate`, {
+        const response = this.fetch(`${this.domain}/auth/authenticate`, {
             method: 'POST',
             body: JSON.stringify({
                 email,
                 password
             })
-        }).then(res => {
-             
-            this.setToken(res.token) // Setting the token in localStorage
-            return Promise.resolve(res);
-        })
+        });
+        this.setToken(response.token);
+        return response;
     }
 
     loggedIn() {

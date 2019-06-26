@@ -14,21 +14,20 @@ class Login extends Component {
         }  
     }
 
-    authenticateUser(e){
+    async authenticateUser(e){
         e.preventDefault();
-        
-        this.auth.login(this.state.email,this.state.password)
-            .then(res =>{
-                console.log(res.token);
-               this.props.history.replace('/user');
-            })
-            .catch(err =>{
-                alert(err);
-            }) 
+        try {
+            const response = await this.auth.login(this.state.email,this.state.password); 
+            console.log(response.token);
+            this.props.history.replace('/user');
+            
+        } catch (err) {
+            // tratamento do erro 
+            alert(err);
+        }
     }
 
     onChange(e){
-
         this.setState(
             {
                 [e.target.name]: e.target.value
