@@ -11,21 +11,7 @@ class User extends Component {
          
         this.state = {
             authorizations: [
-                {
-                    name: "Dispositivo 1",
-                    device: "5d02f4de547e1308c31ce621",
-                    status: "Conectado - Ligado"
-                },
-                {
-                    name: "Novo Dispositivo 2",
-                    description: "5d02f4de547e1308c31ce621",
-                    status: "Conectado - Ligado"
-                },
-                {
-                    name: "Novo Dispositivo 3",
-                    description: "5d02f4de547e1308c31ce621",
-                    status: "Conectado - Ligado"
-                }
+                
             ]
         };
 
@@ -35,28 +21,31 @@ class User extends Component {
     populateAuthorizations = async () => {
         
         //axios.defaults.headers.common = {'Authorization': `Bearer ${this.auth.getToken()}`}
-        const request = await api.get('/device');
-        console.log(request);
+        const request = await api.get('/authorization/devices');
         if(request !== undefined){
-            const data = request.data.devices;
-            console.log(data[0]);
+            const data = request.data.authorizations;
+            let auths = []; 
+            for (let i = 0; i < data.length; i++){
+                auths[i] = { 
+                    name: data[i].name,
+                    device_id: data[i].device_id,
+                    status: "Desconectado."
+                }; 
+            }
+            this.setState({authorizations: auths}); 
         }
 
     }
 
     async componentDidMount() {
-        
         document.title = "Devices";
         await this.populateAuthorizations();
-    
     }
 
     
 
     render() {
         return (
-
-            
             <section id="device-list">
                 {this.state.authorizations.map((device, index) => (
                     <SimpleDevice key={index} >

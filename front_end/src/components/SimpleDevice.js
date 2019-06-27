@@ -1,6 +1,11 @@
 import React, { Component } from 'react'; 
 import Octicon, {Play} from '@primer/octicons-react'
+
+import api from "../services/api";
+
 import './Device.css'
+
+
 
 class SimpleDevice extends Component { 
     constructor(props){
@@ -18,10 +23,27 @@ class SimpleDevice extends Component {
         this.setState(this.props.children); 
     }
     
-    handleSubmit(e){
+    async handleSubmit(e){
         e.preventDefault();
-        this.deviceState = ! this.deviceState; 
-        console.log(this.state.name+" "+this.deviceState );
+        this.deviceState = ! this.deviceState;
+        let valueToSend = "" 
+        this.deviceState ? valueToSend = "v" : valueToSend = "f";  
+        console.log(this.state.name+" "+this.deviceState+" "+this.state.device_id); 
+        try {
+            const response = await api.post("/device/"+this.state.device_id+"/", {
+                value: valueToSend
+            });
+            this.setState({ status: "Comando enviado!" }); 
+            console.log(response.data); 
+    
+        }
+        catch (err) {
+            console.log(err); 
+            this.setState({
+                error:
+                    "Houve um problema com o envio do comando para o dispositivo IoT."
+                });
+        } 
     }
 
     render() {
