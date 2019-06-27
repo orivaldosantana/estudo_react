@@ -5,7 +5,7 @@ import User from './pages/User';
 import Admin from './pages/Admin';
 import Login from './pages/Login'; 
 
-import { isAuthenticated } from './auth'; 
+import { isAuthenticated } from './services/auth'; 
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route {... rest} render={ props => (

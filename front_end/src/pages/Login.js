@@ -1,5 +1,9 @@
 import React, { Component } from 'react'; 
-import AuthService from '../components/AuthService';
+
+import api from "../services/api";
+import { login } from "../services/auth";
+
+
 
 import './Login.css'
 
@@ -8,22 +12,36 @@ class Login extends Component {
         super(props); 
         this.authenticateUser = this.authenticateUser.bind(this);
         this.handleChange = this.onChange.bind(this);
-        this.auth = new AuthService();
+        
         this.state = {
-
-        }  
+            email: "",
+            password: "",
+            error: ""
+        };
+        
     }
 
     async authenticateUser(e){
+        
         e.preventDefault();
-        try {
-            const response = await this.auth.login(this.state.email,this.state.password); 
-            console.log(response.token);
-            this.props.history.replace('/user');
-            
-        } catch (err) {
-            // tratamento do erro 
-            alert(err);
+        const { email, password } = this.state;
+        
+        if (!email || !password) {
+            this.setState({ error: "Preencha e-mail e senha para continuar!" });
+        } else {
+            try {
+                console.log("logar"); 
+                const response = await api.post("/auth/authenticate", { email, password });
+                login(response.data.token);
+                
+                console.log(response); 
+                this.props.history.push("/user");
+            } catch (err) {
+                this.setState({
+                error:
+                    "Houve um problema com o login, verifique suas credenciais."
+                });
+            }
         }
     }
 
@@ -36,8 +54,7 @@ class Login extends Component {
     }
 
     componentWillMount(){
-        if(this.auth.loggedIn())
-            this.props.history.replace('/user');
+        
     }
 
     render() {

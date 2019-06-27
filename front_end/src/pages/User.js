@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import SimpleDevice from '../components/SimpleDevice';
-import axios from "axios";
+ 
 import './User.css';
+import api from "../services/api";
 
 
 class User extends Component {
     constructor() {
         super();
+         
         this.state = {
             authorizations: [
                 {
@@ -31,21 +33,30 @@ class User extends Component {
 
 
     populateAuthorizations = async () => {
-        const request = await axios.get('http://localhost:3002/device');
+        
+        //axios.defaults.headers.common = {'Authorization': `Bearer ${this.auth.getToken()}`}
+        const request = await api.get('/device');
+        console.log(request);
         if(request !== undefined){
-            const data = request.data;
+            const data = request.data.devices;
             console.log(data[0]);
         }
 
     }
 
     async componentDidMount() {
+        
         document.title = "Devices";
         await this.populateAuthorizations();
+    
     }
+
+    
 
     render() {
         return (
+
+            
             <section id="device-list">
                 {this.state.authorizations.map((device, index) => (
                     <SimpleDevice key={index} >

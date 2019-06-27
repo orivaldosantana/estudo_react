@@ -94,4 +94,7 @@ export default Routes;
 1. RocketSeat Start, https://station.rocketseat.com.br
 1. Semana OmniStack - Rocketseat, https://rocketseat.com.br/week-7/inscricao 
 1. Controlando autenticação em rotas no ReactJS - Diego Fernandes, https://www.youtube.com/watch?v=sYe4r8WXGQg 
+1. Iniciando com ReactJS: Navegação e Autenticação com JWT, 
+ https://blog.rocketseat.com.br/reactjs-autenticacao/ 
 1. JSON Web Token Authentication in React and react-router, https://hptechblogs.com/using-json-web-token-react/
+1. React Authentication System Using JWT(JSON Web Tokens) and react-router,  https://www.youtube.com/watch?v=hjp-JHVsgxQ
