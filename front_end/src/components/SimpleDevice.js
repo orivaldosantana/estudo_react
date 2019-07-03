@@ -27,7 +27,7 @@ class SimpleDevice extends Component {
         e.preventDefault();
         this.deviceState = ! this.deviceState;
         let valueToSend = "" 
-        this.deviceState ? valueToSend = "v" : valueToSend = "f";  
+        this.deviceState ? valueToSend = "f" : valueToSend = "s";  
         console.log(this.state.name+" "+this.deviceState+" "+this.state.device_id); 
         try {
             const response = await api.post("/device/"+this.state.device_id+"/", {
