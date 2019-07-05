@@ -1,6 +1,6 @@
 header#main-header {
     background: #fff; 
-    height: 80px;
+    height: 90px;
     border-bottom: 1px solid #BBB; 
 }
 
@@ -8,7 +8,7 @@ header#main-header .header-content {
     width: 100%;
     max-width: 980px; 
     margin: 0 auto; 
-    height: 72px;
+    height: 82px;
     padding: 0 30px; 
 
     display: flex; 

@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router'
 import SimpleDevice from '../components/SimpleDevice';
+import { isAuthenticated } from '../services/auth'; 
  
 import './User.css';
 import api from "../services/api";
@@ -38,16 +40,21 @@ class User extends Component {
     }
 
     async componentDidMount() {
-        document.title = "Devices";
-        await this.populateAuthorizations();
+
+        if (isAuthenticated()) {
+            document.title = "Devices";
+            await this.populateAuthorizations();
+        }
     }
 
     
 
     render() {
         return (
+            
             <section id="device-list">
-                {this.state.authorizations.map((device, index) => (
+                { (!isAuthenticated() ) ? <Redirect to="/login"/> :
+                  this.state.authorizations.map((device, index) => (
                     <SimpleDevice key={index} >
                         {device}
                     </SimpleDevice>

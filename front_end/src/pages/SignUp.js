@@ -4,17 +4,16 @@ import { Link } from "react-router-dom";
 import api from "../services/api";
 import { login } from "../services/auth";
 
-
-
 import './Login.css'
 
-class Login extends Component { 
+class SignUp extends Component { 
     constructor(props){
         super(props); 
-        this.authenticateUser = this.authenticateUser.bind(this);
+        this.registerUser = this.registerUser.bind(this);
         this.handleChange = this.onChange.bind(this);
         
         this.state = {
+            userName: "",
             email: "",
             password: "",
             error: ""
@@ -22,17 +21,17 @@ class Login extends Component {
         
     }
 
-    async authenticateUser(e){
+    async registerUser(e){
         
         e.preventDefault();
-        const { email, password } = this.state;
+        const { userName, email, password } = this.state;
         
-        if (!email || !password) {
-            this.setState({ error: "Preencha e-mail e senha para continuar!" });
+        if (!email || !password || !userName) {
+            this.setState({ error: "Preencha todos os campos para continuar!" });
         } else {
             try {
-                console.log("logar"); 
-                const response = await api.post("/auth/authenticate", { email, password });
+                console.log("inserir"); 
+                const response = await api.post("/auth/register", {userName, email, password });
                 login(response.data.token);
                 
                 console.log(response); 
@@ -40,7 +39,7 @@ class Login extends Component {
             } catch (err) {
                 this.setState({
                 error:
-                    "Houve um problema com o login, verifique suas credenciais."
+                    "Houve um problema cadastro do usuário."
                 });
             }
         }
@@ -66,7 +65,19 @@ class Login extends Component {
                  
                 
                 <form  >
-                    <h3> Login </h3>
+                    <h3> Cadastro de Usuário </h3>
+                    <div className="form-group">
+                        <label htmlFor="inputUserName">Nome</label>
+                        <input 
+                            id="inputUserName"
+                            type="text" 
+                            className="form-control" 
+                            name="userName" 
+                            aria-describedby="userNameHelp" 
+                            placeholder="Digite seu nome"
+                            onChange={this.handleChange}
+                         />
+                    </div>
                     <div className="form-group">
                         <label htmlFor="inputEmail">Email</label>
                         <input 
@@ -75,7 +86,7 @@ class Login extends Component {
                             className="form-control" 
                             name="email" 
                             aria-describedby="emailHelp" 
-                            placeholder="Enter email"
+                            placeholder="Digite seu email"
                             onChange={this.handleChange}
                          />
                     </div>
@@ -91,9 +102,9 @@ class Login extends Component {
                         />
                     </div>
 
-                    <button type="submit" className="btn btn-primary"onClick={this.authenticateUser} >Entrar</button>
+                    <button type="submit" className="btn btn-primary"onClick={this.registerUser} >Cadastrar</button>
                     <hr />
-                    <Link to="/signup">Cadastrar Usuário</Link>
+                    <Link to="/">Fazer login</Link>
                 </form>
             </div>
             </div>
@@ -102,4 +113,4 @@ class Login extends Component {
     }
 }
 
-export default Login; 
+export default SignUp; 
