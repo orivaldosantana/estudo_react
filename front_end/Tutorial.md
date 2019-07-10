@@ -98,3 +98,4 @@ export default Routes;
  https://blog.rocketseat.com.br/reactjs-autenticacao/ 
 1. JSON Web Token Authentication in React and react-router, https://hptechblogs.com/using-json-web-token-react/
 1. React Authentication System Using JWT(JSON Web Tokens) and react-router,  https://www.youtube.com/watch?v=hjp-JHVsgxQ
+1. React Bootstrap, https://react-bootstrap.github.io/getting-started/introduction
