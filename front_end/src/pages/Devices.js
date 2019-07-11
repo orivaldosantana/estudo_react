@@ -20,6 +20,27 @@ class Devices extends Component {
     async submitDevice(e){    
         e.preventDefault();
         console.log(this.state); 
+        const { name, description, topicToRead, topicToWrite } = this.state;
+        
+        if (!name || !topicToRead || !topicToWrite) {
+            this.setState({ error: "Preencha todos os campos vazios!" });
+        } else {
+            try {
+                console.log("inserir dispositivo"); 
+                const response = await api.post("/device", { name, description, topicToRead, topicToWrite });
+                 
+                
+                console.log(response.data); 
+                
+            } catch (err) {
+                this.setState({
+                error:
+                    "Houve um problema cadastro do dispositivo."
+                });
+            }
+        }
+
+
     
     }
 

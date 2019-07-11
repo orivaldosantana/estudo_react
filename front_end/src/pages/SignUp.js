@@ -30,11 +30,11 @@ class SignUp extends Component {
             this.setState({ error: "Preencha todos os campos para continuar!" });
         } else {
             try {
-                console.log("inserir"); 
+                console.log("inserir usuário"); 
                 const response = await api.post("/auth/register", {userName, email, password });
                 login(response.data.token);
                 
-                console.log(response); 
+                console.log(response.data); 
                 this.props.history.push("/user");
             } catch (err) {
                 this.setState({
