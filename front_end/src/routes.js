@@ -6,6 +6,7 @@ import Admin from './pages/Admin';
 import Login from './pages/Login'; 
 import SignUp from './pages/SignUp'; 
 import Devices from './pages/Devices'; 
+import Authorizations from './pages/Authorizations'
 
 import { isAuthenticated } from './services/auth'; 
 
@@ -27,6 +28,7 @@ function Routes() {
             <PrivateRoute path="/user" component={User} />
             <PrivateRoute path="/admin" component={Admin} />
             <PrivateRoute path="/devices" component={Devices} />
+            <PrivateRoute path="/authorizations" component={Authorizations} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={SignUp} />
             <Route path="/" component={User} />
