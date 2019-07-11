@@ -89,6 +89,21 @@ function Routes() {
 export default Routes; 
 ``` 
 
+## Componentes HTMLs
+
+### Seleção 
+
+Botão Dropdown para selecionar um item. 
+
+```jsx
+    <label htmlFor="selectDevices">Dispositivos:</label>
+    <select className="form-control"  value={this.state.value} onChange={this.handleChangeDevices} id="selectDevices">
+        {this.state.devices.map((device, index) => (
+            <option value={index} key={index}>{device.name}</option>
+        ))}
+    </select>
+``` 
+
 # Referências 
 
 1. RocketSeat Start, https://station.rocketseat.com.br
@@ -99,3 +114,4 @@ export default Routes;
 1. JSON Web Token Authentication in React and react-router, https://hptechblogs.com/using-json-web-token-react/
 1. React Authentication System Using JWT(JSON Web Tokens) and react-router,  https://www.youtube.com/watch?v=hjp-JHVsgxQ
 1. React Bootstrap, https://react-bootstrap.github.io/getting-started/introduction
+1. React Forms, https://reactjs.org/docs/forms.html
