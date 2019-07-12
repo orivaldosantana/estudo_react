@@ -24,6 +24,8 @@ class Authorizations extends Component {
     }
 
     async submitAuthorization(e){
+
+        this.setState({ error: ""}); 
         e.preventDefault();
         const device = this.state.selectedIdDevice; 
         const user = this.state.selectedIdUser; 
@@ -38,9 +40,11 @@ class Authorizations extends Component {
             try {
                 console.log("inserir autorização"); 
                 const response = await api.post("/authorization", {device, user, enabled });
-                
+                if ( response.data.authorization._id !== "" ){
+                    alert("Autorização cadastrada com sucesso!"); 
+                }
                 console.log(response.data); 
-                this.props.history.push("/authorizations");
+                 
             } catch (err) {
                 this.setState({
                 error:
@@ -69,12 +73,12 @@ class Authorizations extends Component {
         
 
     handleChangeDevices(e) {
-        console.log('Seleção Dispositivo: ' + e.target.value); 
+        //console.log('Seleção Dispositivo: ' + e.target.value); 
         this.setState({selectedIdDevice: this.state.devices[e.target.value]._id})
     }
 
     handleChangeUsers(e) {
-        console.log('Seleção Usuários: ' + e.target.value); 
+        //console.log('Seleção Usuários: ' + e.target.value); 
         this.setState({selectedIdUser: this.state.users[e.target.value]._id})
     }
 

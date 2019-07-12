@@ -23,7 +23,7 @@ class Login extends Component {
     }
 
     async authenticateUser(e){
-        
+        this.setState({ error: ""}); 
         e.preventDefault();
         const { email, password } = this.state;
         
@@ -67,6 +67,7 @@ class Login extends Component {
                 
                 <form  >
                     <h3> Login </h3>
+                    {this.state.error && <p>{this.state.error}</p>}
                     <div className="form-group">
                         <label htmlFor="inputEmail">Email</label>
                         <input 

@@ -1,6 +1,4 @@
-import React, { Component } from 'react'; 
-import Octicon, {Play} from '@primer/octicons-react'
-
+import React, { Component } from 'react';  
 import api from "../services/api";
 
 import './Device.css'
@@ -34,6 +32,9 @@ class SimpleDevice extends Component {
                 value: valueToSend
             });
             this.setState({ status: "Comando enviado!" }); 
+            if ( response.data.result === "ok" ){
+                alert("Comando enviado com sucesso!"); 
+            }
             console.log(response.data); 
     
         }
@@ -55,9 +56,9 @@ class SimpleDevice extends Component {
                         <span className="status"> {this.state.status} </span> 
                     </div>
                     <form onSubmit={this.handleSubmit}>
-                    <button type="submit">
-                        <Octicon icon={Play} size='medium' ariaLabel='Play'/>
-                    </button> 
+                        <button type="submit" className="btn btn-primary">
+                            Acionar
+                        </button> 
                     </form> 
                   </header>
             </div> 

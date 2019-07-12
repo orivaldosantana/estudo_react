@@ -17,7 +17,8 @@ class Devices extends Component {
         };
     }
 
-    async submitDevice(e){    
+    async submitDevice(e){ 
+        this.setState({ error: ""});    
         e.preventDefault();
         console.log(this.state); 
         const { name, description, topicToRead, topicToWrite } = this.state;
@@ -29,9 +30,17 @@ class Devices extends Component {
                 console.log("inserir dispositivo"); 
                 const response = await api.post("/device", { name, description, topicToRead, topicToWrite });
                  
-                
+                if ( response.data.device._id !== "" ){
+                    this.setState({
+                        name: "",
+                        description: "",
+                        topicToRead: "",
+                        topicToWrite: ""
+                    }); 
+                    alert("Dispositivo cadastrado com sucesso!"); 
+                }
                 console.log(response.data); 
-                
+                 
             } catch (err) {
                 this.setState({
                 error:
@@ -59,8 +68,9 @@ class Devices extends Component {
             <div className="card-body">
                  
                 
-                <form  >
+                <form  onSubmit={this.submitDevice}>
                     <h3> Dispositivo </h3>
+                    {this.state.error && <p>{this.state.error}</p>}
                     <div className="form-group">
                         <label htmlFor="inputName">Nome:</label>
                         <input 
@@ -111,7 +121,7 @@ class Devices extends Component {
 
                      
 
-                    <button type="submit" className="btn btn-primary"onClick={this.submitDevice} >Cadastrar</button>
+                    <button type="submit" className="btn btn-primary" >Cadastrar</button>
                     
                 </form>
             </div>

@@ -22,7 +22,7 @@ class SignUp extends Component {
     }
 
     async registerUser(e){
-        
+        this.setState({ error: ""}); 
         e.preventDefault();
         const { userName, email, password } = this.state;
         
@@ -66,6 +66,7 @@ class SignUp extends Component {
                 
                 <form  >
                     <h3> Cadastro de Usuário </h3>
+                    {this.state.error && <p>{this.state.error}</p>}
                     <div className="form-group">
                         <label htmlFor="inputUserName">Nome</label>
                         <input 

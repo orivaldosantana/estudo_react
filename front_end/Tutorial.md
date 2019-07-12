@@ -104,6 +104,28 @@ Botão Dropdown para selecionar um item.
     </select>
 ``` 
 
+## Rotas de Acesso, serivdor de teste
+
+Todos os usuários 
+* Login, http://teste.orivaiot.tk/login
+* Registro de usuário, http://teste.orivaiot.tk/signup  
+* Tela de acionamento do dispositivo IoT, http://teste.orivaiot.tk/
+
+Usuário Administrador
+* Cadastro de dispositivo, http://teste.orivaiot.tk/devices
+* Cadastro de Autorizações, http://teste.orivaiot.tk/authorizations
+
+Próximos passos: 
+* Implementar as mensagens de interação com o sistema, como: 
+ * Login realizado com sucesso; 
+ * E-mail ou senha digitados incorretamente; 
+ * Campo não pode ser vazio; 
+ * Comando enviado com sucesso;
+ * Dispositivos cadastrado co sucesso; 
+ * Etc... 
+* Implementar o perfil de acesso (usuário comum e administrador);
+* Realizar testes mais intensos no sistema. 
+
 # Referências 
 
 1. RocketSeat Start, https://station.rocketseat.com.br

@@ -7,7 +7,7 @@ export default function Header() {
     return (
         <header id="main-header">
             <div className="header-content">
-                <h1>Sistema de Acesso - IoT </h1>
+                <h1>Acesso - IoT </h1>
                 <img src={logo} width="60" alt="IoTSystem" />
                 
             </div> 
