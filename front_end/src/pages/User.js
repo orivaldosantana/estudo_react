@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router'
 import SimpleDevice from '../components/SimpleDevice';
+import Footer from '../components/Footer'; 
 import { isAuthenticated } from '../services/auth'; 
  
 import './User.css';
@@ -51,7 +52,7 @@ class User extends Component {
 
     render() {
         return (
-            
+            <div>
             <section id="device-list">
                 { (!isAuthenticated() ) ? <Redirect to="/login"/> :
                   this.state.authorizations.map((device, index) => (
@@ -60,6 +61,10 @@ class User extends Component {
                     </SimpleDevice>
                 ))}
             </section>
+            <Footer>
+
+            </Footer>
+            </div> 
         );
     }
 }
