@@ -1,6 +1,7 @@
 import React, { Component } from 'react';  
 import { Redirect } from 'react-router-dom'
 import { logout } from "../services/auth"; 
+import { getUserName } from "../services/auth";
 
 import './Footer.css'; 
 
@@ -28,6 +29,11 @@ class Footer extends Component {
         if (this.state.redirect) {
             return <Redirect to='/target' />
         }
+    }
+
+    async componentDidMount() {
+        this.setState({userName: getUserName()}); 
+        console.log("footer: "+getUserName() ); 
     }
 
     render() {

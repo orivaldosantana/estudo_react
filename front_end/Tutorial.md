@@ -137,3 +137,5 @@ Próximos passos:
 1. React Authentication System Using JWT(JSON Web Tokens) and react-router,  https://www.youtube.com/watch?v=hjp-JHVsgxQ
 1. React Bootstrap, https://react-bootstrap.github.io/getting-started/introduction
 1. React Forms, https://reactjs.org/docs/forms.html
+1. Redirecting in React, https://medium.com/@anneeb/redirecting-in-react-4de5e517354a
+1. A BEAUTIFUL, RESPONSIVE, CUSTOMIZABLE, ACCESSIBLE (WAI-ARIA) REPLACEMENT FOR JAVASCRIPT'S POPUP BOXES, https://sweetalert2.github.io/

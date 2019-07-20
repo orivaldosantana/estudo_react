@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import api from "../services/api";
 import { login } from "../services/auth";
+import { setUserName } from "../services/auth";
 
 
 
@@ -31,11 +32,11 @@ class Login extends Component {
             this.setState({ error: "Preencha e-mail e senha para continuar!" });
         } else {
             try {
-                console.log("logar"); 
+                
                 const response = await api.post("/auth/authenticate", { email, password });
                 login(response.data.token);
-                
-                console.log(response); 
+                setUserName(response.data.user.userName); 
+                console.log("logar: "+response.data.user.userName);  
                 this.props.history.push("/user");
             } catch (err) {
                 this.setState({

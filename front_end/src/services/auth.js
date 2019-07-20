@@ -1,4 +1,5 @@
 export const TOKEN_KEY = "iot_token";
+export const USER_NAME_KEY = "userName"; 
 export const isAuthenticated = () =>{ 
   return localStorage.getItem(TOKEN_KEY) !== null;
 };
@@ -7,6 +8,13 @@ export const login = token => {
   localStorage.setItem(TOKEN_KEY, token);
 };
 export const logout = () => {
-  console.log("logouuuut")
   localStorage.removeItem(TOKEN_KEY);
+};
+
+export const getUserName = () => {
+  return localStorage.getItem(USER_NAME_KEY);
+};
+
+export const setUserName = userName => {
+  localStorage.setItem(USER_NAME_KEY, userName);
 };
