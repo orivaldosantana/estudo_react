@@ -13,7 +13,7 @@ class SimpleDevice extends Component {
             status: ""
         }
         this.handleSubmit = this.handleSubmit.bind(this); 
-        this.deviceState = 0; 
+        this.deviceState = 1; 
     }
 
     
@@ -25,7 +25,7 @@ class SimpleDevice extends Component {
         e.preventDefault();
         this.deviceState = ! this.deviceState;
         let valueToSend = "" 
-        this.deviceState ? valueToSend = "f" : valueToSend = "s";  
+        this.deviceState ? valueToSend = "f" : valueToSend = "v";  
         console.log(this.state.name+" "+this.deviceState+" "+this.state.device_id); 
         try {
             const response = await api.post("/device/"+this.state.device_id+"/", {
@@ -57,7 +57,8 @@ class SimpleDevice extends Component {
                     </div>
                     <form onSubmit={this.handleSubmit}>
                         <button type="submit" className="btn btn-primary">
-                            Acionar
+                            
+                            {this.deviceState ? "Acionar" : "Deligar" }
                         </button> 
                     </form> 
                   </header>
