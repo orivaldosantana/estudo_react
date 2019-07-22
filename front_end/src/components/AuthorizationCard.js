@@ -24,7 +24,7 @@ class AuthorizationCard extends Component {
     }
     
     async handleSubmit(e){
-        //e.preventDefault();
+        e.preventDefault();
  
  
         console.log(this.state.id+" "+this.state.device_name+" "+this.state.user_name); 

@@ -31,7 +31,7 @@ class Authorizations extends Component {
     async submitAuthorization(e){
 
         this.setState({ error: 0}); 
-        //e.preventDefault();
+        e.preventDefault();
         let device = this.state.selectedIdDevice; 
         let user = this.state.selectedIdUser; 
         const enabled = true; 
@@ -45,7 +45,7 @@ class Authorizations extends Component {
             console.log("inserir autorização"); 
             console.log(device+" "+user);
             const response = await api.post("/authorization", {device, user, enabled });
-            //await this.populateAuthorizations();
+
             if ( response.data.authorization._id !== "" ){
                 alert("Autorização cadastrada com sucesso!"); 
             }
