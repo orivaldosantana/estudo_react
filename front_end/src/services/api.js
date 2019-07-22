@@ -2,7 +2,8 @@ import axios from "axios";
 import { getToken } from "./auth";
 
 const api = axios.create({
-  baseURL: "http://api.orivaiot.tk"
+  //baseURL: "http://api.orivaiot.tk"
+  baseURL: "http://localhost:3002"
 });
 
 api.interceptors.request.use(async config => {

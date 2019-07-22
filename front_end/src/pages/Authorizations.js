@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
+import { isAuthenticated } from '../services/auth'; 
+import { Redirect } from 'react-router'
+import Footer from '../components/Footer'; 
+import AuthorizationCard from "../components/AuthorizationCard"
+
+import "../components/Authorization.css" 
 
 import api from "../services/api";
 
-import { isAuthenticated } from '../services/auth'; 
- 
 
 class Authorizations extends Component { 
     constructor(props){ 
@@ -18,41 +22,46 @@ class Authorizations extends Component {
             devices: [],
             selectedDevice: "",
             users: [], 
-            error: ""
+            error: "",
+            authorizations: []
         };
     
     }
 
     async submitAuthorization(e){
 
-        this.setState({ error: ""}); 
-        e.preventDefault();
-        const device = this.state.selectedIdDevice; 
-        const user = this.state.selectedIdUser; 
+        this.setState({ error: 0}); 
+        //e.preventDefault();
+        let device = this.state.selectedIdDevice; 
+        let user = this.state.selectedIdUser; 
         const enabled = true; 
-        console.log(this.state.selectedIdDevice+" "+this.state.selectedIdUser);
-        if ( !device ) {
-            this.setState({ error: "Selecione um dispositivo!" });
-        } else if ( !user ){
-            this.setState({ error: "Selecione um usuário!" });
+        if ( ! device  ) {
+            device =  this.state.devices[0]._id; 
         }
-        else {
-            try {
-                console.log("inserir autorização"); 
-                const response = await api.post("/authorization", {device, user, enabled });
-                if ( response.data.authorization._id !== "" ){
-                    alert("Autorização cadastrada com sucesso!"); 
-                }
-                console.log(response.data); 
-                 
-            } catch (err) {
-                this.setState({
-                error:
-                    "Houve um problema no cadastro de autorização."
-                });
+        if ( ! user ){
+            user =  this.state.users[0]._id; 
+        }
+        try {
+            console.log("inserir autorização"); 
+            console.log(device+" "+user);
+            const response = await api.post("/authorization", {device, user, enabled });
+            //await this.populateAuthorizations();
+            if ( response.data.authorization._id !== "" ){
+                alert("Autorização cadastrada com sucesso!"); 
             }
+            console.log(response.data); 
+                
+        } catch (err) {
+            this.setState({
+            error:
+                "Houve um problema no cadastro de autorização."
+            });
         }
-        console.log("Error:"+this.state.error); 
+
+        if (  this.state.error !== 0  ){
+            alert(this.state.error);
+            console.log("Error:"+this.state.error+"!");
+        } 
     }
 
     populateDevices = async () => {
@@ -70,11 +79,19 @@ class Authorizations extends Component {
             console.log(this.state.users); 
         }
     }
+
+    populateAuthorizations = async () => {
+        const request = await api.get('/authorization/full');
+        if(request !== undefined){
+            this.setState({authorizations: request.data.authorizations}); 
+            console.log(this.state.authorizations); 
+        }
+    }
         
 
     handleChangeDevices(e) {
         //console.log('Seleção Dispositivo: ' + e.target.value); 
-        this.setState({selectedIdDevice: this.state.devices[e.target.value]._id})
+        this.setState({ selectedIdDevice: this.state.devices[e.target.value]._id})
     }
 
     handleChangeUsers(e) {
@@ -87,21 +104,29 @@ class Authorizations extends Component {
         if (isAuthenticated()) {
             document.title = "Autorizações";
             await this.populateDevices();
-            await this.populateUsers(); 
+            await this.populateUsers();
+            await this.populateAuthorizations();  
         }
     }
 
     render() {
         return ( 
+            <div >
+                { (!isAuthenticated() ) ? 
+                <Redirect to="/login"/> : 
             <div className="container"> 
-            <div className="card" id="device_card">
+ 
+
+
+
+            <div className="card" id="auth_card_edit">
             <div className="card-body">
 
                 <form>
                     <h3> Autorização </h3>
                     <div className="form-group">
                         <label htmlFor="selectDevices">Dispositivos:</label>
-                        <select className="form-control"  value={this.state.value} onChange={this.handleChangeDevices} id="selectDevices">
+                        <select className="form-control"  value={this.state.value} onChange={this.handleChangeDevices} id="selectedIdDevice">
 
 
                             {this.state.devices.map((device, index) => (
@@ -125,6 +150,20 @@ class Authorizations extends Component {
                 </form>
             </div>
             </div>
+
+            <section id="auth-list">
+            {this.state.authorizations.map((authori, index) => (
+                <AuthorizationCard key={index}>
+                {authori}
+                </AuthorizationCard>
+            ))}
+            </section>
+
+            </div> 
+            }
+            <Footer>
+
+            </Footer>
             </div>
         );
     }
